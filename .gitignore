@@ -1,0 +1,21 @@
+.project
+.settings
+target/
+.classpath
+/.metadata/
+~*
+.~*
+* *
+*é*
+*è*
+*à*
+*ê*
+*ù*
+*ô*
+*û*
+*î*
+*â
+*ç*
+*'*
+.idea/
+*.iml
