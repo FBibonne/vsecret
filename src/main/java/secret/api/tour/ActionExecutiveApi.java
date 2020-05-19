@@ -3,7 +3,11 @@ package secret.api.tour;
 import lombok.NonNull;
 import secret.model.Alegeance;
 import secret.model.Partie;
+import secret.model.Pouvoir;
+import secret.model.Proclamation;
 import secret.model.tour.Tour;
+
+import java.util.List;
 
 public interface ActionExecutiveApi {
 
@@ -17,7 +21,7 @@ public interface ActionExecutiveApi {
      */
     public Partie jouerAvadaKedavra(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
 
-    public Tour jouerDivination(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
+    public List<Proclamation> jouerDivination(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
 
     public Tour directeurJoueExpelliarmus(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
 

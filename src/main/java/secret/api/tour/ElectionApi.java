@@ -1,10 +1,14 @@
 package secret.api.tour;
 
 import lombok.NonNull;
+import secret.model.Designation;
+import secret.model.Partie;
 import secret.model.tour.Election;
 import secret.model.tour.Tour;
 
 public interface ElectionApi {
+
+    public Election findElectionCourante(@NonNull Partie partie);
 
     public Election designerCandidatDirecteur(@NonNull Designation designation, @NonNull Election election);
 
