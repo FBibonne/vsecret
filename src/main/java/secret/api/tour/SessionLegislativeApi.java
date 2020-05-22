@@ -2,6 +2,7 @@ package secret.api.tour;
 
 import lombok.NonNull;
 import secret.model.Proclamation;
+import secret.model.Promulgation;
 import secret.model.tour.Defausse;
 import secret.model.tour.SessionLegislative;
 import secret.model.exceptions.DefausseurPasMinistreException;

@@ -1,7 +1,9 @@
 package secret.services;
 
 import lombok.NonNull;
+import secret.api.tour.ActionExecutiveApi;
 import secret.model.Partie;
+import secret.model.Pouvoir;
 import secret.model.Proclamation;
 import secret.model.tour.SessionLegislative;
 import secret.model.tour.Tour;
@@ -9,7 +11,7 @@ import secret.model.exceptions.MinistreNePossedePasDefausseException;
 
 public interface TourServices {
 
-    public boolean verifierEndolorisJouable(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
+    public boolean verifierEndolorisJouable(@NonNull Pouvoir pouvoir, @NonNull ActionExecutiveApi tour);
 
     public boolean verifierAvadaKedavraJouable(@NonNull Pouvoir pouvoir, @NonNull Tour tour);
 
