@@ -27,9 +27,10 @@ public class PartieServicesImpl implements PartieServices {
     }
 
     @Override
-    public Partie debuterPartie(@NonNull Long partieId) {
+    public Partie debuterPartieEtDistribuerRoles(@NonNull Long partieId) {
         Partie retour=parties.get(partieId);
         retour.debuterPartie();
+        distribuer les rôles
         return retour;
     }
 

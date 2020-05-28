@@ -12,5 +12,5 @@ public interface PartieServices {
 
     Partie save(@NonNull  Partie partie);
 
-    Partie debuterPartie(@NonNull Long partieId);
+    Partie debuterPartieEtDistribuerRoles(@NonNull Long partieId);
 }

@@ -4,10 +4,18 @@
  
 ## Actions disponibles dans l'API
 
- * [ ] Créer partie :
+ * [-] Créer partie :
    * [X] Contrat : `PartieApi.creerPartie`
+   * [X] implémentation
+   * [X] javadoc api
+   * [ ] javadoc services
+   * [ ] tests
  * [ ] Créer joueur :
    * [X] Contrat : `PartieApi.creerJoueur`
+   * [X] implémentation
+   * [X] javadoc api
+   * [ ] javadoc services
+   * [ ] tests
  * [X] Choix du ministre :
    * A priori automatique au début du tour : à déplacer dans traitements sous jacents
  * [ ] Choisir directeur :
@@ -21,8 +29,10 @@
  
 ## Traitements sous jacents
  
- * [ ] Commencer partie (lorsque tous les joueurs sont créés)
- * [ ] Commencer tour
+ * [-] Commencer partie (lorsque tous les joueurs sont créés)
+ * [ ] Distribuer rôles aux joueurs
+ * [ ] Commencer tour au commencement d'une partie
+ * [ ] Commencer nouveau tour à la fin d'un tour
  * [X] Tirer 3 proclamations
  * [ ] Suivi élections (gestion du résultat sur le nombre d'élection du tour. Eventuellement fin de partie )
  * [ ] Suivi partie

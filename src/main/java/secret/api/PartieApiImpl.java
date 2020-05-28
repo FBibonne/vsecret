@@ -6,12 +6,14 @@ import secret.model.Partie;
 import secret.model.exceptions.IdJoueurIncorrectException;
 import secret.model.exceptions.NbJoueursIncorrectsException;
 import secret.services.PartieServices;
+import secret.services.TourServices;
 
 import java.util.Date;
 
 public class PartieApiImpl implements PartieApi{
 
-    private PartieServices partieService;
+    private PartieServices partieServices;
+    private TourServices tourServices;
 
     @Override
     public Partie creerPartie(int nbJoueurs, String nomPartie) throws NbJoueursIncorrectsException {
@@ -21,7 +23,7 @@ public class PartieApiImpl implements PartieApi{
         }
 
         Partie retour=new Partie(nbJoueurs, nomPartie);
-        return partieService.save(retour);
+        return partieServices.save(retour);
     }
 
     /**
@@ -38,7 +40,8 @@ public class PartieApiImpl implements PartieApi{
         Joueur nouveauJoueur=new Joueur(idJoueur);
         partie.ajouterJoueur(nouveauJoueur);
         if (partie.isTousLesJoueursPresent()){
-            partieService.debuterPartie(partie.getId());
+            partieServices.debuterPartieEtDistribuerRoles(partie.getId());
+            tourServices.commencerPremierTour(partie);
         }
         return nouveauJoueur;
     }
