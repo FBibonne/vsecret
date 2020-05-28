@@ -1,18 +1,26 @@
 package secret.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import secret.model.exceptions.IdJoueurIncorrectException;
 import secret.utils.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Getter
 @Setter
 @ToString(of = "nom")
+@EqualsAndHashCode(of="nom")
 public class Joueur {
 
+    private static String regexNom="[a-zA-Z0-9éèêàôûîâù_]+";
+    private static Pattern patternNom=Pattern.compile(regexNom);
+
+    /**
+     * Est un identifiant du joueur. Doit respecter certaines règles...
+     * Le nom doit respecter le pattern suivant :
+     */
     private String nom;
 
     /**
@@ -25,6 +33,17 @@ public class Joueur {
      * des proclamations en main
      */
     private List<Proclamation> main=new ArrayList<>();
+
+    public Joueur(@NonNull  String nom) throws IdJoueurIncorrectException {
+        verifiersyntaxeNomCorrecteSinonException(nom);
+        etat=EtatJoueur.VIVANT;
+    }
+
+    public static void verifiersyntaxeNomCorrecteSinonException(@NonNull String nom) throws IdJoueurIncorrectException {
+        if (! patternNom.matcher(nom).matches()){
+            throw new IdJoueurIncorrectException("L'identifiant \""+nom+"\" fourni pour créer un joueur ne respecte pas le pattern "+regexNom);
+        }
+    }
 
 
     /**

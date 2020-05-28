@@ -33,6 +33,7 @@
 * Ajouter couche Web 
 * Voir l'organisation des packages dans le model
 * Externaliser les noms des champs de l'API pour rendre la sémantique du jeu paramétrable
+* couche web : Identifier chaque joueur à l'origine de la requête et fournir une référence sur l'objet joueur associé dans les appels de la couche API 
  
 ## Etat des tests 
  

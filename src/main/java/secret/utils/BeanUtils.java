@@ -1,6 +1,7 @@
 package secret.utils;
 
 import lombok.NonNull;
+import secret.model.exceptions.NbJoueursIncorrectsException;
 
 import java.util.function.Consumer;
 
