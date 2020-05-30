@@ -29,6 +29,12 @@ public class Joueur {
     private EtatJoueur etat;
 
     /**
+     * Le rôle secret du joueur qui contien aussi son allegeance
+     */
+    @Getter
+    private RoleSecret roleSecret;
+
+    /**
      * Correspond à la main du joueur lorsqu'il est ministre ou directeur et qu'il a
      * des proclamations en main
      */
@@ -36,7 +42,7 @@ public class Joueur {
 
     public Joueur(@NonNull  String nom) throws IdJoueurIncorrectException {
         verifiersyntaxeNomCorrecteSinonException(nom);
-        etat=EtatJoueur.VIVANT;
+        etat=EtatJoueur.ATTENTE_ROLE;
     }
 
     public static void verifiersyntaxeNomCorrecteSinonException(@NonNull String nom) throws IdJoueurIncorrectException {
@@ -57,9 +63,26 @@ public class Joueur {
     public List<Proclamation> extraireDeuxPremieresProclamations() {
         List<Proclamation> retour=new ArrayList<>();
         if(main!=null && main.size()>=2){
-            retour= BeanUtils.repeat(retour, l->l.add(main.remove(0)) ,2);
+            BeanUtils.repeat(retour, l -> l.add(main.remove(0)), 2);
         }
         return retour;
+    }
 
+    /**
+     * L'attribution du role secret fixe aussi l'allégeance qui en dépend.
+     * Change l'état du joueur
+     * @param roleSecret la valeur affectée à this.roleSecret
+     */
+    public void setRoleSecret(@NonNull RoleSecret roleSecret){
+        this.roleSecret=roleSecret;
+        etat=EtatJoueur.PRET;
+    }
+
+    /**
+     * Wraper pour accéder à l'alégeance qui est dans le role secret
+     * @return roleSecret==null?null:roleSecret.alegeance
+     */
+    public Alegeance getAlegeance(){
+        return roleSecret==null?null:roleSecret.getAlegeance();
     }
 }

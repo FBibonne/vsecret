@@ -12,7 +12,7 @@ import secret.model.tour.Defausse;
 import secret.model.tour.EtatTour;
 import secret.model.tour.Tour;
 import secret.services.JoueurServiceImpl;
-import secret.services.TourServicesImpl;
+import secret.services.tour.TourServicesImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;

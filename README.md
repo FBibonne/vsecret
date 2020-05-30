@@ -16,27 +16,29 @@
    * [X] javadoc api
    * [ ] javadoc services
    * [ ] tests
- * [X] Choix du ministre :
-   * A priori automatique au début du tour : à déplacer dans traitements sous jacents
- * [ ] Choisir directeur :
+* [ ] Révéler les rôles aux mange mort
+* [ ] Afficher le ministre candidat
+* [ ] Lister directeurs elligibles
+* [ ] Choisir directeur :
    * [X] Contrat : `ElectionApi.designerCandidatDirecteur`
- * [ ]  Voter :
-   * [X] Contrat : `ElectionApi.voter` 
- * [X] Défausser
- * [ ] Promulguer
-   * [X] Contrat : `SessionLegislativeApi.IdJoueurIncorrectException` 
- * [ ] Pouvoirs
+* [ ]  Voter :
+    * [X] Contrat : `ElectionApi.voter` 
+* [ ] ministre / directeur consulte sa main : n'importe quel joueur peut consulter sa main
+* [X] Défausser
+* [ ] Promulguer
+  * [X] Contrat : `SessionLegislativeApi.IdJoueurIncorrectException` 
+* [ ] Pouvoirs
  
 ## Traitements sous jacents
  
- * [-] Commencer partie (lorsque tous les joueurs sont créés)
- * [ ] Distribuer rôles aux joueurs
+ * [?] Commencer partie (lorsque tous les joueurs sont créés)
+ * [X] Distribuer rôles aux joueurs
  * [ ] Commencer tour au commencement d'une partie
  * [ ] Commencer nouveau tour à la fin d'un tour
- * [X] Tirer 3 proclamations
+ * [ ] Désignation du ministre
+ * [X] Tirer 3 proclamations et les mettre dans la main du ministre
  * [ ] Suivi élections (gestion du résultat sur le nombre d'élection du tour. Eventuellement fin de partie )
  * [ ] Suivi partie
- * [ ] sélection du candidat ministre
  
 ## Sujets techniques
 

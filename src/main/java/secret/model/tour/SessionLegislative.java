@@ -1,18 +1,46 @@
 package secret.model.tour;
 
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import secret.model.Joueur;
+import secret.model.PileProclamations;
 import secret.model.Proclamation;
 
 import java.util.List;
 
+@Getter
+@RequiredArgsConstructor
 public class SessionLegislative {
 
-    private Joueur ministre;
+    /**
+     * Le ministre elu.
+     * <br/>
+     * NB : vérifier la cohérence avec etat : etat==SESSION_LEGISLATIVE => ministre !=null
+     * => pas de setter
+     *
+     */
+    @NonNull
+    private Joueur ministreElu;
 
-    public boolean hasMinistre() {
-        return ministre!=null;
-    }
+    /**
+     * Le directeur elu.
+     * <br/>
+     * NB : vérifier la cohérence avec etat : etat==SESSION_LEGISLATIVE => directeur !=null
+     * => pas de setter
+     *
+     */
+    @NonNull
+    private Joueur directeurElu;
+
+    @Getter
+    private boolean defausseDejaEffectuee=false;
+
+
+    @Getter
+    private boolean piocheDejaEffectuee=false;
+
 
     /**
      * Si un ministre est élu, donne les proclmations tirées passées en paramètre
@@ -23,11 +51,19 @@ public class SessionLegislative {
      * @throws IllegalStateException si pas de ministre elu
      */
     public void donnerProclamationPiocheesAuMinistre(@NonNull List<Proclamation> tirage) {
-
-        if(!hasMinistre()){
-            throw new IllegalStateException("Impossible d'appeler donnerProclamationPiocheesAuMinistreElu dans le tour "+this+" : hasMinistreElu()=false");
-        }
-        ministre.setMain(tirage);
+        ministreElu.setMain(tirage);
+        piocheDejaEffectuee=true;
     }
 
+    public List<Proclamation> getMainDuMinstreElu() {
+        return ministreElu.getMain();
+    }
+
+    public EtatTour getEtat() {
+        return EtatTour.SESSION_LEGISLATIVE;
+    }
+
+    public void defausse() {
+        defausseDejaEffectuee=true;
+    }
 }

@@ -18,7 +18,8 @@ public interface PartieApi {
 
     /**
      * Méthode appelée pour la création d'un nouveau joueur au sein d'une partie.
-     * Lorsque le dernier joueur attendu a été créé, la partie commence automatiquement.
+     * Lorsque le dernier joueur attendu a été créé, la partie commence automatiquement
+     * (distribution des rôles aux joueurs, chgt des états, commencement du 1er tour)
      * @param partie la partie pour laquelle le joueur doit être créé
      * @param idJoueur id du joueur créé : doit être unique et respecter des ctes sur le nom (à définir dans la méthode appliquant la règle de gestion)
      * @return le joueur créé

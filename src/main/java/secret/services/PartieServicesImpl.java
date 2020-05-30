@@ -1,14 +1,11 @@
 package secret.services;
 
 import lombok.NonNull;
-import secret.model.Partie;
-import secret.model.Pouvoir;
-import secret.model.exceptions.NbJoueursIncorrectsException;
+import secret.model.*;
 import secret.model.exceptions.NonImplementeException;
 import secret.model.tour.Tour;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PartieServicesImpl implements PartieServices {
 
@@ -30,8 +27,38 @@ public class PartieServicesImpl implements PartieServices {
     public Partie debuterPartieEtDistribuerRoles(@NonNull Long partieId) {
         Partie retour=parties.get(partieId);
         retour.debuterPartie();
-        distribuer les rôles
+        attribuerLesRoles(retour);
         return retour;
+    }
+
+    @Override
+    public Partie attribuerLesRoles(@NonNull Partie partie) {
+        List<RoleSecret> roleSecrets = creerEtMelangerRoles(partie.getNbJoueurs());
+        distribuerRolesAuxJoueurs(roleSecrets, partie.getJoueurs());
+        return partie;
+    }
+
+    private void distribuerRolesAuxJoueurs(List<RoleSecret> roleSecrets, Set<Joueur> joueurs) {
+        int i=0;
+        for (Joueur joueur:joueurs){
+            joueur.setRoleSecret(roleSecrets.get(i));
+            i++;
+        }
+    }
+
+    private List<RoleSecret> creerEtMelangerRoles(int nbJoueurs) {
+        List<RoleSecret> roleSecrets = new ArrayList<>();
+        roleSecrets.add(RoleSecret.VOLDEMORT);
+
+        int nbPhenix=PartieServices.NB_PHENIX_PARMI_JOUEURS.get(nbJoueurs);
+        roleSecrets.addAll(Collections.nCopies(nbPhenix,RoleSecret.ORDRE_DU_PHENIX));
+
+        int nbMangeMort=nbJoueurs-1-nbPhenix;
+        roleSecrets.addAll(Collections.nCopies(nbMangeMort,RoleSecret.MANGE_MORT));
+
+        Collections.shuffle(roleSecrets);
+
+        return roleSecrets;
     }
 
 }

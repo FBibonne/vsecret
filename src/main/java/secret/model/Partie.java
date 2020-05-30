@@ -14,11 +14,13 @@ public class Partie {
     public static final int NB_JOUEURS_MIN = 5;
     public static final int NB_JOUEURS_MAX = 10;
 
+    @Getter
     private int nbJoueurs;
     private String nom;
     @Getter
     @Setter
     private Long id;
+    @Getter
     private Set<Joueur> joueurs=new HashSet<>();
     private EtatPartie etat;
 
@@ -35,7 +37,7 @@ public class Partie {
         this.etat=EtatPartie.INITIALISATION;
    }
 
-    public void ajouterJoueur(@NonNull  Joueur nouveauJoueur) throws NbJoueursIncorrectsException {
+    public synchronized Partie ajouterJoueur(@NonNull  Joueur nouveauJoueur) throws NbJoueursIncorrectsException {
         if (joueurs.size()>=nbJoueurs){
             throw new NbJoueursIncorrectsException("Nombre de joueurs atteints pour cette partie ("+nbJoueurs+") : "+nouveauJoueur);
         }
@@ -43,6 +45,7 @@ public class Partie {
             throw new IllegalStateException("Impossible d'ajouter un joueur : la partie n'est plus en état d'initialisation");
         }
         joueurs.add(nouveauJoueur);
+        return this;
     }
 
     public boolean isTousLesJoueursPresent() {
@@ -55,4 +58,5 @@ public class Partie {
 
         return this;
     }
+
 }

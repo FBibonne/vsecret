@@ -1,5 +1,5 @@
 package secret.model;
 
 public enum EtatJoueur {
-    VIVANT, MORT
+    ATTENTE_ROLE, PRET, MORT
 }

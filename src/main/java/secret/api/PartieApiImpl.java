@@ -6,7 +6,7 @@ import secret.model.Partie;
 import secret.model.exceptions.IdJoueurIncorrectException;
 import secret.model.exceptions.NbJoueursIncorrectsException;
 import secret.services.PartieServices;
-import secret.services.TourServices;
+import secret.services.tour.TourServices;
 
 import java.util.Date;
 

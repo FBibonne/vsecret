@@ -1,10 +1,7 @@
 package secret.model.tour;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
-import secret.model.Joueur;
-import secret.model.PileProclamations;
 import secret.model.Proclamation;
 
 import java.util.List;
@@ -50,47 +47,23 @@ public class Tour {
     private Proclamation proclamationPromulguee;
 
     /**
-     * Le ministre elu.
-     * <br/>
-     * NB : vérifier la cohérence avec etat : etat==SESSION_LEGISLATIVE => ministre !=null
-     * => pas de setter
-     *
-     */
-    @Getter
-    @Setter
-    private Joueur ministre =null;
-
-    /**
-     * Le directeur elu.
-     * <br/>
-     * NB : vérifier la cohérence avec etat : etat==SESSION_LEGISLATIVE => directeur !=null
-     * => pas de setter
-     *
-     */
-    @Getter
-    @Setter
-    private Joueur directeur=null;
-
-    @Getter
-    private PileProclamations pileProclamations;
-
-    /**
      * Désigne l'instance d'élection qui est en cours de réalisation :
      * les votes des joueurs adressés à ce tour sont placés dans cette
      * instance d'élection
      */
+    @Getter
     private Election electionCourante;
 
-    @Getter
-    @Setter
-    private boolean defausseDejaEffectuee=false;
+    private SessionLegislative sessionLegislative;
+
+    private ActionExecutive actionExecutive;
 
     /**
      *
      * @return ministreElu!=null
      */
     public boolean hasMinistreElu() {
-        return ministre != null;
+        return (electionCourante!=null && electionCourante.getMinistreElu()!=null)|| sessionLegislative!=null || actionExecutive!=null;
     }
 
 
@@ -109,7 +82,12 @@ public class Tour {
      * @return ministre==null?null:ministre.main
      */
     public List<Proclamation> getMainDuMinstreElu() {
-        return ministre==null?null:ministre.getMain();
+        return sessionLegislative==null?null:sessionLegislative.getMainDuMinstreElu();
+    }
+
+    public void setSessionLegislative(SessionLegislative sessionLegislative) {
+        this.sessionLegislative=sessionLegislative;
+        etat=EtatTour.SESSION_LEGISLATIVE;
     }
 
 

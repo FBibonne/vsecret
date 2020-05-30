@@ -14,8 +14,6 @@ import java.util.List;
 
 public interface SessionLegislativeApi {
 
-    public List<Proclamation> ministrePiocheProclamations(@NonNull  SessionLegislative sessionLegislative);
-
     /**
      * Gère la défausse du minitre.
      * Le ministre défausse une carte de sa main (defausse.procalmation) et le système passe dans la mains du directeur
@@ -56,6 +54,6 @@ public interface SessionLegislativeApi {
      * @param sessionLegislative
      * @return
      */
-    public SessionLegislative promulguerProclamation(@NonNull Promulgation promulgation, @NonNull SessionLegislative sessionLegislative);
+    SessionLegislative promulguerProclamation(@NonNull Promulgation promulgation, @NonNull SessionLegislative sessionLegislative);
 
 }
