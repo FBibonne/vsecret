@@ -4,23 +4,23 @@
  
 ## Actions disponibles dans l'API
 
- * [-] Créer partie :
-   * [X] Contrat : `PartieApi.creerPartie`
-   * [X] implémentation
-   * [X] javadoc api
-   * [ ] javadoc services
-   * [ ] tests
- * [ ] Créer joueur :
-   * [X] Contrat : `PartieApi.creerJoueur`
-   * [X] implémentation
-   * [X] javadoc api
-   * [ ] javadoc services
-   * [ ] tests
+* [-] Créer partie :
+  * [X] Contrat : `PartieApi.creerPartie`
+  * [X] implémentation
+  * [X] javadoc api
+  * [ ] javadoc services
+  * [ ] tests
+* [ ] Créer joueur :
+  * [X] Contrat : `PartieApi.creerJoueur`
+  * [X] implémentation
+  * [X] javadoc api
+  * [ ] javadoc services
+  * [ ] tests
 * [ ] Révéler les rôles aux mange mort
 * [ ] Afficher le ministre candidat
 * [ ] Lister directeurs elligibles
 * [ ] Choisir directeur :
-   * [X] Contrat : `ElectionApi.designerCandidatDirecteur`
+  * [X] Contrat : `ElectionApi.designerCandidatDirecteur`
 * [ ]  Voter :
     * [X] Contrat : `ElectionApi.voter` 
 * [ ] ministre / directeur consulte sa main : n'importe quel joueur peut consulter sa main
@@ -37,7 +37,7 @@
  * [ ] Commencer nouveau tour à la fin d'un tour
  * [ ] Désignation du ministre
  * [X] Tirer 3 proclamations et les mettre dans la main du ministre
- * [ ] Suivi élections (gestion du résultat sur le nombre d'élection du tour. Eventuellement fin de partie )
+ * [ ] Suivi élections (gestion du résultat sur le nombre d'élections du tour. Eventuellement fin de partie. Suivi des joueurs élus pour gérer l'inégibilité)
  * [ ] Suivi partie
  
 ## Sujets techniques

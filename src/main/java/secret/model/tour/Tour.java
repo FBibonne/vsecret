@@ -1,6 +1,7 @@
 package secret.model.tour;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import secret.model.Proclamation;
 
@@ -32,6 +33,7 @@ public class Tour {
     /**
      * Rang du tour dans la partie
      */
+    @Getter
     private int id;
 
     /**
@@ -41,8 +43,6 @@ public class Tour {
     @Getter
     @Setter
     private EtatTour etat;
-
-    private int nbElectionsRealisees=0;
 
     private Proclamation proclamationPromulguee;
 
@@ -57,6 +57,24 @@ public class Tour {
     private SessionLegislative sessionLegislative;
 
     private ActionExecutive actionExecutive;
+
+    @Getter
+    private FournisseurProchainCandidatMinistre fournisseurProchainCandidatMinistre;
+
+    /**
+     * Crée une nouvelle instance du tour et initie la phase d'élection
+     * @param fournisseurProchainCandidatMinistre
+     * @param id
+     */
+    public Tour(@NonNull  FournisseurProchainCandidatMinistre fournisseurProchainCandidatMinistre, int id){
+        this.fournisseurProchainCandidatMinistre=fournisseurProchainCandidatMinistre;
+        this.electionCourante=new Election(fournisseurProchainCandidatMinistre);
+        this.actionExecutive=null;
+        this.sessionLegislative=null;
+        this.proclamationPromulguee=null;
+        this.etat=EtatTour.ELECTION;
+        this.id=id;
+    }
 
     /**
      *

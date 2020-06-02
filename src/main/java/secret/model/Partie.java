@@ -3,11 +3,12 @@ package secret.model;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import secret.model.exceptions.IdJoueurIncorrectException;
 import secret.model.exceptions.NbJoueursIncorrectsException;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Partie {
 
@@ -21,7 +22,8 @@ public class Partie {
     @Setter
     private Long id;
     @Getter
-    private Set<Joueur> joueurs=new HashSet<>();
+    private List<Joueur> joueurs=new ArrayList<>();
+    private Integer rangProchainMinistre;
     private EtatPartie etat;
 
     public static void verifierNombreJoueursValidePourPartieSinonException(int nbJoueurs) throws NbJoueursIncorrectsException {
@@ -37,25 +39,31 @@ public class Partie {
         this.etat=EtatPartie.INITIALISATION;
    }
 
-    public synchronized Partie ajouterJoueur(@NonNull  Joueur nouveauJoueur) throws NbJoueursIncorrectsException {
+    public synchronized Partie ajouterJoueur(@NonNull  Joueur nouveauJoueur) throws NbJoueursIncorrectsException, IdJoueurIncorrectException {
         if (joueurs.size()>=nbJoueurs){
             throw new NbJoueursIncorrectsException("Nombre de joueurs atteints pour cette partie ("+nbJoueurs+") : "+nouveauJoueur);
         }
         if (etat!=EtatPartie.INITIALISATION){
             throw new IllegalStateException("Impossible d'ajouter un joueur : la partie n'est plus en état d'initialisation");
         }
+        if (isNomDejaExistantParmiJoueursInsensiblementCasse(nouveauJoueur.getNom())){
+            throw new IdJoueurIncorrectException("L'id "+nouveauJoueur.getNom()+" du nouveau joueur est déjà utilisé");
+        }
         joueurs.add(nouveauJoueur);
         return this;
+    }
+
+    public boolean isNomDejaExistantParmiJoueursInsensiblementCasse(String nom) {
+        return joueurs.stream().map(Joueur::getNom).map(String::toLowerCase).filter(nom::equals).count()>0;
     }
 
     public boolean isTousLesJoueursPresent() {
         return joueurs.size()==nbJoueurs;
     }
 
-    public Partie debuterPartie() {
+    public Partie debuterPartie(int rangMinistrePremierTour) {
         etat=EtatPartie.EN_COURS;
-        joueurs= Collections.unmodifiableSet(joueurs);
-
+        joueurs= Collections.unmodifiableList(joueurs);
         return this;
     }
 

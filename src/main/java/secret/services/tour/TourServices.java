@@ -8,20 +8,13 @@ import secret.services.ProclamationServices;
 
 public interface TourServices {
 
-    public void setProclamationServices(ProclamationServices proclamationServices);
+    int ID_PREMIER_TOUR = 1;
 
-    /**
-     * Initie une nouvelle élection si aucune n'est déjà en cours....
-     * Désigne automatiquement le candidat ministre pour l'élection à venir
-     *
-     * @param tour
-     * @return le tour avec l'élection dedans
-     */
-    public Tour commencerElection(@NonNull Tour tour);
+    public void setProclamationServices(ProclamationServices proclamationServices);
 
     public Tour commencerSessionLegislative(@NonNull Tour tour, @NonNull PileProclamations pileProclamations);
 
-    public Tour commencerNouveauTour(@NonNull Tour tourTermine);
+    public Tour commencerNouveauTour(@NonNull Tour tourPrecedent);
 
     public Tour commencerPremierTour(@NonNull Partie partie);
 }
