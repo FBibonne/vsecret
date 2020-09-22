@@ -3,11 +3,11 @@ package secret.api;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import secret.api.tour.SessionLegislativeApiImpl;
-import secret.model.*;
-import secret.model.exceptions.DefausseException;
+import secret.model.Joueur;
+import secret.model.Proclamation;
 import secret.model.exceptions.DefausseurPasMinistreException;
 import secret.model.exceptions.MinistreNePossedePasDefausseException;
-import secret.model.exceptions.OperationInterditePourEtatTourException;
+import secret.model.exceptions.OperationInterditeParEtatException;
 import secret.model.tour.Defausse;
 import secret.model.tour.EtatTour;
 import secret.model.tour.Tour;
@@ -55,7 +55,7 @@ class SessionLegislativeApiImplTest {
     @Test
     void defausserEtpasserProclamationsAuDirecteur_shouldRaiseOperationInterdite_withoutLEGISLATIVE() {
         tour.setEtat(EtatTour.ACTION_EXECUTIVE);
-        assertThrows(OperationInterditePourEtatTourException.class, ()->tourApiImpl.defausserEtpasserProclamationsAuDirecteur(defausse,tour));
+        assertThrows(OperationInterditeParEtatException.class, ()->tourApiImpl.defausserEtpasserProclamationsAuDirecteur(defausse,tour));
     }
 
     @Test
@@ -64,7 +64,7 @@ class SessionLegislativeApiImplTest {
         try {
             tourApiImpl.defausserEtpasserProclamationsAuDirecteur(defausse, tour);
             fail("Pas d'erreur");
-        } catch (OperationInterditePourEtatTourException oie) {
+        } catch (OperationInterditeParEtatException oie) {
             assertEquals("Erreur dans action Defausse : Opération interdite pour le tour courant dont l'état est "+EtatTour.SESSION_LEGISLATIVE+" | defausse déjà effectuée pour ce tour", oie.getMessage());
         } catch (DefausseException de) {
             fail("Mauvaise exception : " + de);

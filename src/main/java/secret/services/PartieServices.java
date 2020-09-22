@@ -3,6 +3,7 @@ package secret.services;
 import lombok.NonNull;
 import secret.model.Partie;
 import secret.model.Pouvoir;
+import secret.model.RoleSecret;
 import secret.model.tour.Tour;
 
 import java.util.Collections;
@@ -50,5 +51,7 @@ public interface PartieServices {
      * @param partie : doit vérifier tous les joueurs présents
      * @return l'instance actuelle modifiée
      */
-    Partie attribuerLesRoles(Partie partie);
+    Partie attribuerLesRoles(@NonNull Partie partie);
+
+    Map<String, RoleSecret> listerRoles(@NonNull Partie partie);
 }

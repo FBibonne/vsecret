@@ -6,7 +6,7 @@ import lombok.Setter;
 import secret.model.Promulgation;
 import secret.model.exceptions.DefausseurPasMinistreException;
 import secret.model.exceptions.MinistreNePossedePasDefausseException;
-import secret.model.exceptions.OperationInterditePourEtatTourException;
+import secret.model.exceptions.OperationInterditeParEtatException;
 import secret.model.tour.Defausse;
 import secret.model.tour.SessionLegislative;
 import secret.services.JoueurService;
@@ -22,17 +22,17 @@ public class SessionLegislativeApiImpl implements SessionLegislativeApi {
 
     @Override
     //TODO TEster
-    public SessionLegislative defausserEtpasserProclamationsAuDirecteur(@NonNull Defausse defausse, @NonNull SessionLegislative sessionLegislative) throws OperationInterditePourEtatTourException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException {
+    public SessionLegislative defausserEtpasserProclamationsAuDirecteur(@NonNull Defausse defausse, @NonNull SessionLegislative sessionLegislative) throws OperationInterditeParEtatException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException {
 
         if (sessionLegislative.isDefausseDejaEffectuee()) {
-            throw new OperationInterditePourEtatTourException(sessionLegislative.getEtat(), "defausse déjà effectuée pour ce tour");
+            throw new OperationInterditeParEtatException(sessionLegislative.getEtat(), "defausse déjà effectuée pour ce tour");
         }
-        if (! defausse.getDefausseur().equals(sessionLegislative.getMinistre())){
-            throw new DefausseurPasMinistreException(defausse.getDefausseur(), sessionLegislative.getMinistre());
+        if (! defausse.getDefausseur().equals(sessionLegislative.getMinistreElu())){
+            throw new DefausseurPasMinistreException(defausse.getDefausseur(), sessionLegislative.getMinistreElu());
         }
         sessionLegislativeServices.verifierMinistrePossedeProclamationDefausseeSinonException(sessionLegislative, defausse.getProclamation());
 
-        joueurService.defausser(sessionLegislative.getMinistre(), defausse.getProclamation());
+        joueurService.defausser(sessionLegislative.getMinistreElu(), defausse.getProclamation());
         sessionLegislative =sessionLegislativeServices.ministreTransmetDeuxProclamationAuDirecteur(sessionLegislative);
 
         sessionLegislative.defausse();

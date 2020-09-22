@@ -16,7 +16,14 @@
   * [X] javadoc api
   * [ ] javadoc services
   * [ ] tests
-* [ ] Révéler les rôles aux mange mort
+* [ ] Consulter un joueur
+  * Pas d'api : retourner l'objet joueur reconnu par la couche web à partir du jeton ?
+* [ ] Lister les rôles des joueurs pour les joueurs autorisés :
+  * [X] Contrat : `joueurApi.listerRoles`
+  * [ ] implémentation
+  * [ ] javadoc api
+  * [ ] javadoc services
+  * [ ] tests   
 * [ ] Afficher le ministre candidat
 * [ ] Lister directeurs elligibles
 * [ ] Choisir directeur :

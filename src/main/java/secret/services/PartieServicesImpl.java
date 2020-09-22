@@ -1,11 +1,16 @@
 package secret.services;
 
 import lombok.NonNull;
-import secret.model.*;
+import secret.model.Joueur;
+import secret.model.Partie;
+import secret.model.Pouvoir;
+import secret.model.RoleSecret;
 import secret.model.exceptions.NonImplementeException;
 import secret.model.tour.Tour;
 
 import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 public class PartieServicesImpl implements PartieServices {
 
@@ -26,8 +31,8 @@ public class PartieServicesImpl implements PartieServices {
     @Override
     public Partie debuterPartieEtDistribuerRoles(@NonNull Long partieId) {
         Partie retour=parties.get(partieId);
-        retour.debuterPartie();
         attribuerLesRoles(retour);
+        retour.debuterPartie();
         return retour;
     }
 
@@ -38,7 +43,12 @@ public class PartieServicesImpl implements PartieServices {
         return partie;
     }
 
-    private void distribuerRolesAuxJoueurs(List<RoleSecret> roleSecrets, Set<Joueur> joueurs) {
+    @Override
+    public Map<String, RoleSecret> listerRoles(@NonNull Partie partie) {
+        return partie.getJoueurs().stream().collect(toMap(Joueur::getNom, Joueur::getRoleSecret));
+    }
+
+    private void distribuerRolesAuxJoueurs(List<RoleSecret> roleSecrets, List<Joueur> joueurs) {
         int i=0;
         for (Joueur joueur:joueurs){
             joueur.setRoleSecret(roleSecrets.get(i));

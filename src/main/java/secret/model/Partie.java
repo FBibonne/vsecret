@@ -24,6 +24,7 @@ public class Partie {
     @Getter
     private List<Joueur> joueurs=new ArrayList<>();
     private Integer rangProchainMinistre;
+    @Getter
     private EtatPartie etat;
 
     public static void verifierNombreJoueursValidePourPartieSinonException(int nbJoueurs) throws NbJoueursIncorrectsException {
@@ -61,7 +62,7 @@ public class Partie {
         return joueurs.size()==nbJoueurs;
     }
 
-    public Partie debuterPartie(int rangMinistrePremierTour) {
+    public Partie debuterPartie() {
         etat=EtatPartie.EN_COURS;
         joueurs= Collections.unmodifiableList(joueurs);
         return this;

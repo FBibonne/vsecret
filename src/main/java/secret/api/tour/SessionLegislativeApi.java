@@ -1,16 +1,12 @@
 package secret.api.tour;
 
 import lombok.NonNull;
-import secret.model.Proclamation;
 import secret.model.Promulgation;
 import secret.model.tour.Defausse;
 import secret.model.tour.SessionLegislative;
 import secret.model.exceptions.DefausseurPasMinistreException;
 import secret.model.exceptions.MinistreNePossedePasDefausseException;
-import secret.model.exceptions.OperationInterditePourEtatTourException;
-import secret.model.tour.Tour;
-
-import java.util.List;
+import secret.model.exceptions.OperationInterditeParEtatException;
 
 public interface SessionLegislativeApi {
 
@@ -34,9 +30,9 @@ public interface SessionLegislativeApi {
      * @param defausse : la défausse à gérer dans le sessionLegislative
      * @param sessionLegislative : le sessionLegislative courant concerné par la défausse et le passage de proclamations du ministre au directeur
      * @return le sessionLegislative courant modifié par l'action de la méthode
-     * @throws OperationInterditePourEtatTourException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException : si conditions par respectées
+     * @throws OperationInterditeParEtatException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException : si conditions par respectées
      */
-    public SessionLegislative defausserEtpasserProclamationsAuDirecteur(@NonNull Defausse defausse, @NonNull SessionLegislative sessionLegislative) throws OperationInterditePourEtatTourException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException;
+    public SessionLegislative defausserEtpasserProclamationsAuDirecteur(@NonNull Defausse defausse, @NonNull SessionLegislative sessionLegislative) throws OperationInterditeParEtatException, DefausseurPasMinistreException, MinistreNePossedePasDefausseException;
 
     /**
      * Api par laquelle le directeur promulgue sa proclamation parmi les deux cartes qu'il a en main.
